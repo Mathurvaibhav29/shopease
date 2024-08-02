@@ -1,17 +1,45 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import * as React from "react";
+import * as ReactDOM from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import "./index.css";
+import CartContextProvider from "./context/CartContextProvider";
+import Error from "../src/components/Error";
+import Cart from "./components/Cart";
+import Authenticate from "./components/Authenticate";
+import Login from "./firebase/Login";
+import Home from "./components/Home";
+import ProductListing from "./components/ProductListing";
+import { Provider } from "react-redux";
+import store from "./Slice/store";
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home />,
+    errorElement: <Error />,
+  },
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  {
+    path: "/Cart",
+    element: <Cart />,
+  },
+  {
+    path: "/Authenticate",
+    element: <Authenticate />,
+  },
+  {
+    path: "/Login",
+    element: <Login />,
+  },
+  {
+    path: "/ProductListing",
+    element: <ProductListing />,
+  },
+]);
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <Provider store={store}>
+    <CartContextProvider>
+      <RouterProvider router={router} />
+    </CartContextProvider>
+  </Provider>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
