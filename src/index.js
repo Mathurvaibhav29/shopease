@@ -10,7 +10,7 @@ import Login from "./firebase/Login";
 import Home from "./components/Home";
 import ProductListing from "./components/ProductListing";
 import { Provider } from "react-redux";
-import store from "./Slice/store";
+import store from "../src/Slice/store"
 const router = createBrowserRouter([
   {
     path: "/",
